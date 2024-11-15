@@ -880,8 +880,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deckJSON: {fileID: 4900000, guid: caff80825454742cba113312425f8137, type: 3}
   layoutJSON: {fileID: 4900000, guid: 307e888510354470cbe5247b493ee817, type: 3}
-  xOffset: 3
-  yOffset: 4
+  xOffset: -3
+  yOffset: -6
   layoutCenter: {x: 0, y: 0, z: 0}
   fsPosMid: {x: 0.5, y: 0.9}
   fsPosRun: {x: 0.5, y: 0.75}
