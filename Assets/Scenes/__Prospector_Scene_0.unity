@@ -881,13 +881,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 827460508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc8e5d708577a7a49afe30038992daff, type: 3}
+  m_Script: {fileID: 11500000, guid: d96d07072de350447b9e3d6d3187b882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   deckJSON: {fileID: 4900000, guid: caff80825454742cba113312425f8137, type: 3}
   layoutJSON: {fileID: 4900000, guid: 307e888510354470cbe5247b493ee817, type: 3}
-  xOffset: -3
-  yOffset: -6
+  xOffset: 3
+  yOffset: -2.5
   layoutCenter: {x: 0, y: 0, z: 0}
   fsPosMid: {x: 0.5, y: 0.9}
   fsPosRun: {x: 0.5, y: 0.75}

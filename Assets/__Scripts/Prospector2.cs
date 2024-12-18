@@ -170,45 +170,40 @@ public class Prospector : MonoBehaviour {
         }
     }
 
-public void CardClicked(CardProspector cd) {
-    switch (cd.state) {
-        case eCardState.target:
-            break;
-        
-        case eCardState.drawpile:
-            // In Golf Solitaire, you don’t move the target card from the draw pile to the discard.
-            MoveToTarget(Draw());   // Draw a new card to the target.
-            UpdateDrawPile();       // Update the draw pile.
-            ScoreManager.EVENT(eScoreEvent.draw);
-            break;
-        
-        case eCardState.tableau:
-            bool validMatch = true;
-
-            // In Golf Solitaire, check if the clicked card is adjacent (higher or lower rank) than the discard pile's top card.
-            if (!cd.faceUp) {
-                validMatch = false;  // The card must be face-up.
-            }
-
-            // Check if the card is one rank higher or lower than the current target (discard pile).
-            if (Mathf.Abs(cd.rank - target.rank) != 1) {
-                validMatch = false;
-            }
-
-            if (!validMatch) return;  // If the card doesn't meet the conditions, do nothing and return.
+    public void CardClicked(CardProspector cd) {
+        switch (cd.state) {
+            case eCardState.target:
+                break;
             
-            tableau.Remove(cd);  // Remove the card from the tableau (board).
-            MoveToTarget(cd);     // Move the clicked card to the target (discard pile).
-            SetTableauFaces();    // Update the tableau to reveal or hide cards based on current state.
+            case eCardState.drawpile:
+                MoveToDiscard(target);
+                MoveToTarget(Draw());
+
+                UpdateDrawPile();
+                ScoreManager.EVENT(eScoreEvent.draw);
+                break;
             
-            ScoreManager.EVENT(eScoreEvent.mine);  // Log the event of a valid move.
-            FloatingScoreHandler(eScoreEvent.mine); // Handle floating score for a valid move.
-            break;
+            case eCardState.tableau:
+                bool validMatch = true;
+                if (!cd.faceUp) {
+                    validMatch = false;
+                }
+                if (!AdjacentRank(cd, target)) {
+                    validMatch = false;
+                }
+                if (!validMatch) return;
+
+                tableau.Remove(cd);
+                MoveToTarget(cd);
+                SetTableauFaces();
+
+                ScoreManager.EVENT(eScoreEvent.mine);
+                FloatingScoreHandler(eScoreEvent.mine);
+                break;
+        }
+
+        CheckForGameOver();
     }
-
-    CheckForGameOver();  // After the move, check if the game is over.
-}
-
 
     public bool AdjacentRank(CardProspector c0, CardProspector c1) {
         if (!c0.faceUp || !c1.faceUp) return false;
